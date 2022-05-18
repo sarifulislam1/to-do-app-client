@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const AddTask = () => {
     const [isReload, setIsReload] = useState(false)
@@ -8,10 +9,10 @@ const AddTask = () => {
         const name = e.target.name.value
 
         const description = e.target.description.value
-        console.log(name, description);
+        // console.log(name, description);
 
-
-        fetch('http://localhost:4000/addTask', {
+        const url = 'https://pacific-atoll-80768.herokuapp.com/addTask'
+        fetch(url, {
             method: 'POST',
             headers: {
 
@@ -29,6 +30,11 @@ const AddTask = () => {
                 setIsReload(!isReload)
             });
 
+    }
+    const navigate = useNavigate()
+
+    const allTaskHandle = () => {
+        navigate('/all-task')
     }
 
 
@@ -51,6 +57,7 @@ const AddTask = () => {
                 </InputGroup>
                 <input className='btn btn-success m-3 p-2' type="submit" value="Submit" />
             </form>
+            <Button onClick={allTaskHandle} variant="outline-success">All Task</Button>
         </div>
     );
 };

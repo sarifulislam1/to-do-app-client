@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import auth from '../Firebase/Firebase.init';
 import Task from './Task';
 
 const AllTask = () => {
     const [task, setTask] = useState([])
+    // const [user] = useAuthState(auth);
+    const navigate = useNavigate()
 
-    fetch('http://localhost:4000/addTask')
+    const addtaskhandle = () => {
+        navigate('/add-task')
+    }
+
+    //  https://pacific-atoll-80768.herokuapp.com/
+    fetch('https://pacific-atoll-80768.herokuapp.com/addTask')
         .then(res => res.json())
         .then(data => setTask(data))
+
+
+
     return (
         <div>
             <div>
@@ -24,17 +36,9 @@ const AllTask = () => {
                         }
                     </div>
                 </div>
-                {/* <Card border="success" style={{ width: '18rem' }}>
-                    <Card.Header>{task.name}</Card.Header>
-                    <Card.Body>
-                        <Card.Title>Success Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk
-                            of the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card> */}
+
             </div>
+            <button onClick={addtaskhandle} className='btn btn-success'>Add Task</button>
         </div>
     );
 };

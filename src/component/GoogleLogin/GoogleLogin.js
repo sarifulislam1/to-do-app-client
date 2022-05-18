@@ -15,24 +15,7 @@ const GoogleLogin = () => {
     useEffect(() => {
         if (user) {
 
-            const url = 'https://boiling-crag-46002.herokuapp.com/login'
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: user.user.email
-                }),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    localStorage.setItem('accessToken', data.accessToken)
-                    navigate(from);
-                });
-
-
-
+            navigate(from);
 
         }
     }, [user]);
