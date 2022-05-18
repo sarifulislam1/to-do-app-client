@@ -7,14 +7,14 @@ import auth from '../Firebase/Firebase.init';
 
 const Task = ({ task }) => {
     const navigate = useNavigate()
-    const [user] = useAuthState(auth);
+    // const [user] = useAuthState(auth);
     const [isReload, setIsReload] = useState(false);
 
     const handleDelete = (id) => {
         const confirm = window.confirm('are you sure you want to delete this task')
 
-        if (confirm && user) {
-            fetch(`https://pacific-atoll-80768.herokuapp.com/${id}`, {
+        if (confirm) {
+            fetch(`https://pacific-atoll-80768.herokuapp.com/addTask/${id}`, {
                 method: "DELETE",
             })
                 .then((res) => res.json())
